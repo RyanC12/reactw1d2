@@ -7,9 +7,6 @@ export default class Beer extends Component {
         super(props)
         this.state = {
             beersObject: [],
-            targetBeer: null,
-            selectedBeer: [],
-            beerStyle: 'white',
             isActive: null
         }
     }
@@ -43,17 +40,7 @@ export default class Beer extends Component {
             this.setState({
                 isActive: i -1
             })
-        }
-        // this.setState({
-        //     targetBeer: beerId,
-            
-        // })
-        // const selectedBeer = this.state.beersObject.find(beer => beer.id == this.state.targetBeer)
-        // console.log(selectedBeer)
-       
-        
-        
-    
+        }    
     }
  
 
