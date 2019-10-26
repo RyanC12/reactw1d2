@@ -8,7 +8,9 @@ export default class Beer extends Component {
         this.state = {
             beersObject: [],
             targetBeer: null,
-            selectedBeer: []
+            selectedBeer: [],
+            beerStyle: 'white',
+            isActive: null
         }
     }
 
@@ -18,13 +20,13 @@ export default class Beer extends Component {
         .then(res => this.setState({beersObject: res}))
     }
     sortBeer = () => {
-        const newBeer = this.state.beersObject.map((beer) => {
+        const newBeer = this.state.beersObject.map((beer, i) => {
             return (<tr>
                 <td>{beer.name}</td>
                 <td>{beer.tagline}</td>
                 <td>{beer.first_brewed}</td>
                 <td>{beer.discription}</td>
-                <td><button key={beer.id}  onClick={this.buttonValue.bind(this,beer.id)}>Like</button></td>
+                <td><button key={i} style={this.state.isActive === i ? {background: 'orange'} : {background: "white"}} onClick={this.buttonValue.bind(this,beer.id)}>Like</button></td>
             </tr>)
         })
         return newBeer
@@ -32,19 +34,28 @@ export default class Beer extends Component {
 
    
 
-    buttonValue = (beerId, event) => {
-        this.setState({
-            targetBeer: beerId,
+    buttonValue = (i) => {
+        if(i === this.state.isActive){
+            this.setState({
+                isActive: null
+            })
+        }else{
+            this.setState({
+                isActive: i -1
+            })
+        }
+        // this.setState({
+        //     targetBeer: beerId,
             
-        })
-        const selectedBeer = this.state.beersObject.find(beer => beer.id == this.state.targetBeer)
-        console.log(selectedBeer)
+        // })
+        // const selectedBeer = this.state.beersObject.find(beer => beer.id == this.state.targetBeer)
+        // console.log(selectedBeer)
+       
+        
+        
+    
     }
-    // beerSelected = () => {
-    //     const selectedBeer = this.state.beersObject.find(beer => beer.id == this.state.targetBeer)
-    //     console.log(selectedBeer)
-    //  }
-
+ 
 
     
 
