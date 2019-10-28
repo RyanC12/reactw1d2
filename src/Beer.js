@@ -7,7 +7,8 @@ export default class Beer extends Component {
         super(props)
         this.state = {
             beersObject: [],
-            isActive: null
+            isActive: null,
+            beerId: []
         }
     }
 
@@ -23,7 +24,7 @@ export default class Beer extends Component {
                 <td>{beer.tagline}</td>
                 <td>{beer.first_brewed}</td>
                 <td>{beer.discription}</td>
-                <td><button key={i} style={this.state.isActive === i ? {background: 'orange'} : {background: "white"}} onClick={this.buttonValue.bind(this,beer.id)}>Like</button></td>
+                <td><button id={beer.id} style={this.state.beerId == beer.id ? {background: 'orange'} : {background: "white"}} onClick={this.buttonValue}>Like</button></td>
             </tr>)
         })
         return newBeer
@@ -31,16 +32,15 @@ export default class Beer extends Component {
 
    
 
-    buttonValue = (i) => {
-        if(i === this.state.isActive){
-            this.setState({
-                isActive: null
-            })
-        }else{
-            this.setState({
-                isActive: i -1
-            })
-        }    
+    buttonValue = (event) => {
+        event.preventDefault()
+        console.log(event.target.id)
+        // const testing = event.target.id
+        console.log("beerId", this.state.beerId)
+        this.setState({
+            beerId: event.target.id
+        })
+      
     }
  
 
