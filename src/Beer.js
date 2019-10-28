@@ -8,7 +8,7 @@ export default class Beer extends Component {
         this.state = {
             beersObject: [],
             isActive: null,
-            beerId: []
+            beersLiked: []
         }
     }
 
@@ -24,7 +24,7 @@ export default class Beer extends Component {
                 <td>{beer.tagline}</td>
                 <td>{beer.first_brewed}</td>
                 <td>{beer.discription}</td>
-                <td><button id={beer.id} style={this.state.beerId == beer.id ? {background: 'orange'} : {background: "white"}} onClick={this.buttonValue}>Like</button></td>
+                <td><button style={this.state.beersLiked[i]? {background: 'orange'} : {background: "white"}} onClick={() => this.buttonValue(i)}>Like</button></td>
             </tr>)
         })
         return newBeer
@@ -32,14 +32,21 @@ export default class Beer extends Component {
 
    
 
-    buttonValue = (event) => {
-        event.preventDefault()
-        console.log(event.target.id)
-        // const testing = event.target.id
-        console.log("beerId", this.state.beerId)
+    buttonValue = (i, event) => {
+        let newBeersLiked = this.state.beersLiked;
+        newBeersLiked[i] = !newBeersLiked[i];
+        newBeersLiked = this.state.beersLiked.slice(0, this.state.beersLiked.length)
         this.setState({
-            beerId: event.target.id
+            beersLiked: newBeersLiked
         })
+
+        console.log("index of", i)
+        console.log("true or false", this.state.beersLiked)
+        // const testing = event.target.id
+        // console.log("beerId", this.state.beerId)
+        // this.setState({
+        //     beerId: event.target.id
+        // })
       
     }
  
